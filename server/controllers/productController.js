@@ -14,12 +14,19 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
 exports.getAllProducts = catchAsyncErrors(async (req, res) => {
 
-    const aptFeature = new ApiFeatures(Product.find(), req.query).search().filter();
-    // const products = await Product.find();
+
+    const resultPerTage = 5
+    const productCount = await Product.countDocuments();
+
+    const aptFeature = new ApiFeatures(Product.find(), req.query)
+        .search()
+        .filter()
+        .pagination(resultPerTage)
     const products = await aptFeature.query;
     res.status(200).json({
         success: true,
-        products
+        products,
+        productCount
     })
 })
 
@@ -81,7 +88,8 @@ exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
         } else {
             res.status(200).json({
                 success: true,
-                product
+                product,
+                productCount
             })
         }
     } catch (e) {

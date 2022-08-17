@@ -7,12 +7,12 @@ module.exports = (err, req, res,next) => {
 
 
     if(err.name === 'CastError'){
-        const message = 'Ошибочка!'
-        err = new ErrorHandler(message,404)
+        const message = 'Ресурс не найден!'
+        err = new ErrorHandler(message,400)
     }
 
     res.status(err.statusCode).json({
         success: false,
-        message: err.name
+        message: err.message
     })
 }
