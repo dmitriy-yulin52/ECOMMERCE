@@ -9,8 +9,9 @@ app.use(cookieParser());
 app.use(cors({
     origin:'http://localhost:3000',
     credentials:true,
-    optionSuccessStatus:200
+    optionSuccessStatus:200,
 }));
+
 
 const product = require('./routes/productRoute');
 const user = require('./routes/userRoute');
@@ -20,7 +21,6 @@ app.use('/api/v1',user);
 
 
 app.use(errorMiddleware);
-
 
 
 module.exports = app;

@@ -27,8 +27,6 @@ class ApiFeatures {
         let queryStr = JSON.stringify(queryCopy);
         queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`)
 
-        console.log(queryStr)
-
         this.query = this.query.find(JSON.parse(queryStr));
         return this;
     }
