@@ -7,16 +7,17 @@ import {ImCart} from "react-icons/im";
 
 
 const options = {
+  burgerColor: "#eb4034",
   burgerColorHover: "#eb4034",
   logo,
   logoWidth: "20vmax",
-  navColor1: "#ededed",
+  navColor1: "#fff",
   logoHoverSize: "10px",
   logoHoverColor: "#eb4034",
-  link1Text: "Home",
-  link2Text: "Products",
-  link3Text: "Contact",
-  link4Text: "About",
+  link1Text: "Дом",
+  link2Text: "Продукты",
+  link3Text: "Контакты",
+  link4Text: "Информация",
   link1Url: "/",
   link2Url: "/products",
   link3Url: "/contact",
@@ -42,7 +43,7 @@ const options = {
   searchIcon:true,
   SearchIconElement:ImSearch,
   cartIcon:true,
-  CartIconElement:ImCart
+  CartIconElement:ImCart,
 };
 
 

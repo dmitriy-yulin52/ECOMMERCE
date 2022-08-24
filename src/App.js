@@ -20,7 +20,7 @@ function App() {
     return (
         <Routes>
             {/*<Header/>*/}
-            <Route exact path={'/'} element={<Home/>}/>
+            <Route path={'/'} element={<Home/>}/>
             {/*<Footer/>*/}
         </Routes>
     );

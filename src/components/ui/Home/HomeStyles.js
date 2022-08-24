@@ -53,12 +53,16 @@ const Banner = styled(Box)`
       margin-bottom: 5vmax;
       cursor: pointer;
       background-color: white;
-      border: 1px solid white;
-      border-radius: 0;
+      color:#1976d2;
+      border: none;
+      border-radius: 10px;
       padding: 1vmax;
       transition: all 0.5s;
       width: 9vmax;
       font: 500 1vmax "Roboto";
+      :hover{
+        color:white;
+      }
   }
 `
 
