@@ -15,9 +15,9 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
     })
 })
 
-exports.getAllProducts = catchAsyncErrors(async (req, res) => {
+exports.getAllProducts = catchAsyncErrors(async (req, res,next) => {
 
-    const resultPerTage = 5
+    const resultPerTage = 8
     const productCount = await Product.countDocuments();
 
     const aptFeature = new ApiFeatures(Product.find(), req.query)

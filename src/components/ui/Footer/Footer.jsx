@@ -8,19 +8,20 @@ import {FooterWrapper, LeftBlock, MiddleBlock, RightBlock} from "./FooterStyles"
 const Footer = () => {
     return (
         <FooterWrapper>
+
             <LeftBlock >
-                <Typography variant={'h4'} component={'h4'}>DOWNLOAD OUR APP</Typography>
-                <Typography component={'p'}>Download App for Android and IOS mobile phone</Typography>
+                <Typography variant={'h4'} component={'h4'}>СКАЧАЙТЕ ВАШЕ ПРИЛОЖЕНИЕ</Typography>
+                <Typography component={'p'}>Скачать приложение для мобильных телефонов Android и IOS</Typography>
                 <img src={playStore} alt="playstore"/>
                 <img src={appStore} alt="Appstore"/>
             </LeftBlock>
             <MiddleBlock>
                 <Typography variant={'h1'} component={'h1'}>GORKY_52.</Typography>
-                <Typography component={'p'}>High Quality is our first priority</Typography>
+                <Typography component={'p'}>Высокое качество - наш главный приоритет</Typography>
                 <Typography component={'p'}>Copyrights 2022 &copy; Yulin Dmitriy</Typography>
             </MiddleBlock>
             <RightBlock>
-                <Typography variant={'h4'} component={'h4'}>Follow Us</Typography>
+                <Typography variant={'h4'} component={'h4'}>Связаться со мной</Typography>
                 <Link href="https://t.me/gorky_52" target={'_blank'}>Telegram</Link>
             </RightBlock>
         </FooterWrapper>

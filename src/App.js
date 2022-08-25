@@ -1,10 +1,10 @@
 import * as React from 'react'
 import {useEffect} from "react";
-import Header from "./components/ui/Header/Header";
 import WebFont from 'webfontloader';
-import Footer from "./components/ui/Footer/Footer";
-import {Routes,Route} from 'react-router-dom'
+import {Routes, Route} from 'react-router-dom'
 import Home from "./components/ui/Home/Home";
+import Layout from "./components/ui/Layout/Layout";
+import ProductDetails from "./components/ui/ProductDetails/ProductDetails";
 
 
 function App() {
@@ -19,9 +19,10 @@ function App() {
 
     return (
         <Routes>
-            {/*<Header/>*/}
-            <Route path={'/'} element={<Home/>}/>
-            {/*<Footer/>*/}
+            <Route element={<Layout/>}>
+                <Route path={'/'} element={<Home/>}/>
+                <Route path={'/product/:id'} element={<ProductDetails/>}/>
+            </Route>
         </Routes>
     );
 }
