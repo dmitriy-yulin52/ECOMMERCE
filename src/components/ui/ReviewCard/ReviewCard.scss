@@ -1,0 +1,38 @@
+.reviewCard {
+  flex: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.226);
+  border: 1px solid rgba(56, 56, 56, 0.116);
+  width: 30vmax;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1vmax;
+  padding: 3vmax;
+
+  img {
+    width: 5vmax;
+  }
+
+  p {
+    color: rgba(0, 0, 0, 0.836);
+    font: 600 0.9vmax "Roboto";
+  }
+
+  span {
+    color: rgba(0, 0, 0, 0.445);
+    font: 300 0.8vmax cursive;
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .reviewCard {
+    p {
+      font: 600 3vw "Roboto";
+    }
+    span {
+      font: 300 3vw cursive;
+    }
+  }
+
+}

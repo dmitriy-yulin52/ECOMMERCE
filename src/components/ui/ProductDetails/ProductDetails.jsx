@@ -1,26 +1,22 @@
 import * as React from 'react';
-import {useParams} from "react-router-dom";
-import {useEffect} from "react";
+import {useCallback, useEffect, useState} from 'react';
+import {useLocation, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {productDetailsActions} from "../../../store/reducers/productDetails/actions";
 import MetaData from "../MetaData";
-import Carousel from "react-material-ui-carousel";
-import {
-    Avatar,
-    Box,
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    IconButton,
-    Rating,
-    Typography
-} from "@mui/material";
+import {Box, Button, Rating, Typography} from "@mui/material";
 import Loader from "../../common/Loader/Loader";
 import './ProductDetails.scss'
-import AddSharpIcon from '@mui/icons-material/AddSharp';
-import RemoveSharpIcon from '@mui/icons-material/RemoveSharp';
+import Carousel from 'better-react-carousel'
+import {
+    PRODUCT_DETAILS_FAIL,
+    PRODUCT_DETAILS_REQUEST,
+    PRODUCT_DETAILS_SUCCESS
+} from "../../../store/reducers/productDetails/constants";
+import {productApi} from "../../../api/product/productApi";
+import ReviewCard from "../ReviewCard/ReviewCard";
+import DialogReview from "../../common/DialogReview/DialogReview";
+import {snackBarActions} from "../../../store/reducers/snackBar/snackBarReducer";
+import {productDetailsActions} from "../../../store/reducers/productDetails/actions";
 
 
 const options = {
@@ -29,18 +25,80 @@ const options = {
     precision: 0.5,
 };
 
+
+const style = {margin: '0px auto 10px auto'}
+
+
 const ProductDetails = () => {
 
-    const {product, loading} = useSelector(state => state.productDetails)
-
-    console.log(product, 'product')
-
+    const {product, loading, error} = useSelector(state => state.productDetails)
+    const {pathname} = useLocation();
     const dispatch = useDispatch()
     const {id} = useParams()
 
+
+    const [prod, setProd] = useState({})
+    const [quantity, setQuantity] = useState(0);
+    const [textDialogReview, setTextDialogReview] = useState('')
+    const [openDialogReview, setOpenDialogReview] = useState(false)
+
+
+    const onChangeTextDialogReview = useCallback((e) => {
+        setTextDialogReview(e.currentTarget.value)
+    }, [])
+    const onCloseDialogReviewHandler = useCallback(() => {
+        setOpenDialogReview(false)
+    }, [setOpenDialogReview])
+    const onOpenDialogReviewHandler = useCallback(() => {
+        setOpenDialogReview(true)
+    }, [setOpenDialogReview])
+
+
+    const incrQuantity = () => {
+        // if (product.Stock <= quantity) return;
+
+        const qty = quantity + 1;
+        setQuantity(qty)
+    };
+
+    const decrQuantity = () => {
+        // if (1 >= quantity) return;
+
+        const qty = quantity - 1;
+        setQuantity(qty);
+    };
+
     useEffect(() => {
-        dispatch(productDetailsActions.getProductDetails(id))
-    }, [dispatch, id])
+        (async () => {
+            try {
+                dispatch({
+                    type: PRODUCT_DETAILS_REQUEST
+                })
+                const {data} = await productApi.getProductDetails(id);
+                dispatch({
+                    type: PRODUCT_DETAILS_SUCCESS,
+                    payload: data.product
+                })
+                setProd(data)
+            } catch (error) {
+                dispatch({
+                    type: PRODUCT_DETAILS_FAIL,
+                    payload: error.response.data?.message ?? 'Ошибка'
+                })
+            }
+        })()
+        window.scrollTo(0, 0);
+    }, [dispatch, id,pathname])
+
+
+    useEffect(() => {
+        if (error) {
+            dispatch(snackBarActions.openSnackBar(true))
+            dispatch(snackBarActions.setMessage(error))
+            dispatch(productDetailsActions.clearError())
+        }
+    }, [dispatch, error])
+
 
     return (
         <>
@@ -53,16 +111,24 @@ const ProductDetails = () => {
                         className={'ProductDetails'}
                     >
                         <Box className={'block'}>
-                            <Carousel className={'Carousel'}>
-                                {product.images &&
-                                    product.images.map((item, i) => (
-                                        <img
-                                            className="CarouselImage"
-                                            key={i}
-                                            src={item.url}
-                                            alt={`${i} Slide`}
-                                        />
-                                    ))}
+                            <Carousel
+                                hideArrow={product.images && product?.images.length === 1}
+                                cols={1}
+                                rows={1}
+                                gap={10}
+                                loop
+                                scrollSnap
+                                autoplay={3000}
+                                mobileBreakpoint={500}
+                            >
+                                {prod.product ? prod.product.images.map((el) => {
+                                    return <Carousel.Item key={el.url}>
+                                        <img width="100%" src={el.url}/>
+                                    </Carousel.Item>
+                                }) : <Carousel.Item>
+                                    <img width="100%" src={'https://picsum.photos/800/600?random=1'}/>
+                                </Carousel.Item>}
+
                             </Carousel>
                         </Box>
 
@@ -82,12 +148,9 @@ const ProductDetails = () => {
                                 <Typography variant={'h1'} component={'h1'}>{`${product.price}P`}</Typography>
                                 <Box className="detailsBlock-3-1">
                                     <Box className="detailsBlock-3-1-1">
-                                        <IconButton>
-                                            <RemoveSharpIcon/>
-                                        </IconButton>
-                                        <IconButton>
-                                            <AddSharpIcon/>
-                                        </IconButton>
+                                        <button onClick={decrQuantity}>-</button>
+                                        <Typography component={'span'}>{quantity}</Typography>
+                                        <button onClick={incrQuantity}>+</button>
                                     </Box>
                                     <Button
                                         className={'button-last'}
@@ -99,8 +162,11 @@ const ProductDetails = () => {
                                 </Box>
                                 <Typography component={'p'}>
                                     Статус:
-                                    <Typography component={'b'} className={product.Stock < 1 ? "redColor" : "greenColor"}>
-                                        {product.Stock < 1 ? "OutOfStock" : "InStock"}
+                                    <Typography
+                                        margin={'0px 0px 0px 8px'}
+                                        component={'b'}
+                                        className={product.Stock < 1 ? "redColor" : "greenColor"}>
+                                        {product.Stock < 1 ? "Нет в наличии" : "В наличии"}
                                     </Typography>
                                 </Typography>
                             </Box>
@@ -109,55 +175,28 @@ const ProductDetails = () => {
                                 Описание : <Typography component={'p'}>{product.description}</Typography>
                             </Box>
 
-                            <Button onClick={() => {
-                            }} className="submitReview">
+                            <Button onClick={onOpenDialogReviewHandler} className="submitReview">
                                 Отправить отзыв
                             </Button>
                         </Box>
                     </Box>
-                    <Typography component={'h3'} style={{margin:'0px auto 10px auto'}} className="reviewsHeading">ОТЗЫВЫ</Typography>
-                    <Dialog
-                        aria-labelledby="simple-dialog-title"
-                        open={false}
-                        onClose={() => {
-                        }}
-                    >
-                        <DialogTitle>Отправить отзыв</DialogTitle>
-                        <DialogContent className="submitDialog">
-                            <Rating
-                                onChange={() => {
-                                }}
-                                value={0}
-                                size="large"
-                            />
+                    <Box>
+                        <h3 style={style} className="reviewsHeading">ОТЗЫВЫ</h3>
+                        <DialogReview
+                            value={textDialogReview}
+                            isOpen={openDialogReview}
+                            onChange={onChangeTextDialogReview}
+                            onCloseDialog={onCloseDialogReviewHandler}
+                        />
+                        {product.reviews && product.reviews[0] ? (
+                            <Box className="reviews">
+                                {product.reviews && product.map((review) => <ReviewCard review={review}/>)}
+                            </Box>
+                        ) : (
+                            <Box className="noReviews">Отзывов Пока Нет</Box>
+                        )}
+                    </Box>
 
-                            <textarea
-                                className="submitDialogTextArea"
-                                cols="30"
-                                rows="5"
-                                value={'comment'}
-                                onChange={() => {
-                                }}
-                            ></textarea>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={() => {
-                            }} color="secondary">
-                                Отмена
-                            </Button>
-                            <Button onClick={() => {
-                            }} color="primary">
-                                Отправить
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
-                    {product.reviews && product.reviews[0] ? (
-                        <Box className="reviews">
-                            Отзывы
-                        </Box>
-                    ) : (
-                        <Typography component={'p'} className="noReviews">Отзывов Пока Нет</Typography>
-                    )}
                 </>
             )}
         </>

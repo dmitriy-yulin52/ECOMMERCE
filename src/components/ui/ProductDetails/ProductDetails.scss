@@ -6,7 +6,7 @@
   display: flex;
 
   .Carousel {
-    width: 20vmax;
+    width: 14vmax;
 
     button {
       width: 3vmax;
@@ -14,7 +14,7 @@
     }
 
     .CarouselImage {
-      width: 20vmax;
+      width: 14vmax;
     }
   }
 
@@ -30,7 +30,7 @@
     .submitReview {
       border: none;
       background-color: tomato;
-      font: 500 0.7vmax "Roboto";
+      font: 500 1.1vmax "Roboto";
       border-radius: 20px;
       padding: 0.6vmax 2vmax;
       margin: 1vmax 0;
@@ -102,12 +102,17 @@
   .detailsBlock-3-1 {
     display: flex;
     align-items: center;
+    @media screen and (max-width: 780px) {
+      flex-direction: column;
+    }
 
     button {
       border: none;
       background-color: rgba(0, 0, 0, 0.616);
       padding: 0.5vmax;
       color: white;
+      border-radius: 10px;
+      cursor: pointer;
     }
 
     .button-last {
@@ -116,11 +121,14 @@
       color: white;
       transition: all 0.5s;
       background-color: tomato;
-      font: 500 0.7vmax "Roboto";
+      font: 500 1.1vmax "Roboto";
       border-radius: 20px;
       padding: 0.5vmax 2vmax;
       margin: 1vmax;
       outline: none;
+      @media screen and (max-width: 960px) {
+        font: 500 1.0vmax "Roboto";
+      }
     }
 
     .button-last:hover {
@@ -128,14 +136,18 @@
     }
 
     .detailsBlock-3-1-1 {
-      input {
-        border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      span {
         padding: 0.5vmax;
-        width: 1vmax;
         text-align: center;
-        outline: none;
         font: 400 0.8vmax "Roboto";
         color: rgba(0, 0, 0, 0.74);
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
       }
 
       button {
@@ -143,7 +155,8 @@
         background-color: rgba(0, 0, 0, 0.616);
         padding: 0.5vmax;
         color: white;
-
+        width: 30px;
+        height: 30px;
       }
     }
   }
@@ -180,38 +193,12 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.226);
   padding: 1vmax;
   width: 20vmax;
+
 }
 
 .reviews {
   display: flex;
   overflow: auto;
-}
-
-.reviewCard {
-  flex: none;
-
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.226);
-  border: 1px solid rgba(56, 56, 56, 0.116);
-  width: 30vmax;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1vmax;
-  padding: 3vmax;
-}
-
-.reviewCard > img {
-  width: 5vmax;
-}
-
-.reviewCard > p {
-  color: rgba(0, 0, 0, 0.836);
-  font: 600 0.9vmax "Roboto";
-}
-
-.reviewCardComment {
-  color: rgba(0, 0, 0, 0.445);
-  font: 300 0.8vmax cursive;
 }
 
 .noReviews {
@@ -231,82 +218,83 @@
   }
 
 
-  .detailsBlock-1 > h2 {
+  .detailsBlock-1 {
     h2 {
-
+      font-size: 2.8vmax;
+      text-align: center;
     }
-
-    font-size: 2.8vmax;
-    text-align: center;
   }
 
-  .detailsBlock-1 > p {
-    text-align: center;
-    font-size: 1vmax;
+  .detailsBlock-1 {
+    p {
+      text-align: center;
+      font-size: 1vmax;
+    }
   }
 
   .detailsBlock-2 {
     justify-content: center;
-  }
-  .detailsBlock-2 > span {
-    font-size: 1.5vmax;
+
+    span {
+      font-size: 1.5vmax;
+    }
   }
 
-  .detailsBlock-3 > h1 {
-    font: 700 3vmax "Franklin Gothic Medium";
-    text-align: center;
+  .detailsBlock-3 {
+    h1 {
+      font: 700 3vmax "Franklin Gothic Medium";
+      text-align: center;
+    }
   }
 
   .detailsBlock-3-1 {
     flex-direction: column;
+
+    .detailsBlock-3-1-1 {
+      padding: 2vmax 0;
+
+      button {
+        padding: 1.0vmax;
+        width: 4vmax;
+      }
+    }
   }
 
-  .detailsBlock-3-1-1 {
-    padding: 2vmax 0;
-  }
-  .detailsBlock-3-1-1 > button {
-    padding: 1.2vmax;
-    width: 4vmax;
-  }
 
-  .detailsBlock-3-1-1 > input {
-    padding: 1.5vmax;
-    width: 3vmax;
-    font: 400 1.8vmax "Roboto";
-  }
-
-  /*.detailsBlock-3-1 > button:last-child {*/
-  /*  font: 500 1.7vmax "Roboto";*/
-  /*  padding: 1.5vmax;*/
-  /*  width: 20vmax;*/
-  /*  margin: 3vmax 0;*/
-  /*}*/
-
-  .detailsBlock-3 > p {
-    padding: 2.5vmax 0;
-    text-align: center;
-    font: 400 2vmax "Roboto";
+  .detailsBlock-3 {
+    p {
+      padding: 2.5vmax 0;
+      text-align: center;
+      font: 400 2vmax "Roboto";
+    }
   }
 
   .detailsBlock-4 {
     font: 500 2.5vmax sans-serif;
+
+    p {
+      font: 300 1.8vmax sans-serif;
+    }
+  }
+  .reviewsHeading {
+    font: 500 1.7vmax "Roboto";
+  }
+  .noReviews {
+    font: 400 1.5vmax "Gill Sans"
   }
 
-  .detailsBlock-4 > p {
-    font: 300 1.8vmax sans-serif;
+  .submitReview {
+    font: 500 1.7vmax "Roboto";
+    padding: 1.5vmax;
+    width: 20vmax;
+    margin: 3vmax 0;
   }
 
-  /*.submitReview {*/
-  /*  font: 500 1.7vmax "Roboto";*/
-  /*  padding: 1.5vmax;*/
-  /*  width: 20vmax;*/
-  /*  margin: 3vmax 0;*/
-  /*}*/
+}
 
-  .reviewCard > p {
-    font: 600 3vw "Roboto";
+@media screen and (max-width: 960px) {
+  .button-last {
+    font: 500 0.9vmax "Roboto";
   }
-  .reviewCardComment {
-    font: 300 5vw cursive;
-  }
+
 }

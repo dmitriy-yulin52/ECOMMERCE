@@ -1,9 +1,12 @@
 import {createGlobalStyle} from "styled-components";
-
+import logo from '../assets/images/logo.png'
 
 export const GlobalStyle = createGlobalStyle`
 *{
     box-sizing: border-box;
+}
+body {
+  cursor: url(${logo}), auto;
 }
 .menuBurger{
      box-sizing: content-box;
@@ -17,4 +20,29 @@ export const GlobalStyle = createGlobalStyle`
   a{
     text-decoration: none;
   }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.redColor{
+    color:red;
+}
+.greenColor{
+    color:green;
+}
+::-webkit-scrollbar {
+    width:8px;
+    height: 8px;
+    background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ff0202;
+    border-radius: 9em;
+    box-shadow: inset 1px 1px 10px #f3faf7;
+}
 `

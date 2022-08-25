@@ -4,6 +4,7 @@ import WebFont from 'webfontloader';
 import {Routes, Route} from 'react-router-dom'
 import Home from "./components/ui/Home/Home";
 import Layout from "./components/ui/Layout/Layout";
+import './styles/styles.scss'
 import ProductDetails from "./components/ui/ProductDetails/ProductDetails";
 
 

@@ -1,17 +1,16 @@
 import * as React from 'react';
+import {useCallback, useEffect} from 'react';
 import {CgMouse} from "react-icons/cg";
 import img from '../../../assets/images/cover.jfif'
-import {Box, Button, Link, Typography} from "@mui/material";
+import {Button, Link, Typography} from "@mui/material";
 import {BannerBlock, WrapperHome} from "./HomeStyles";
 import ProductCard from '../Product/ProductCard'
 import MetaData from '../MetaData'
 import {useDispatch, useSelector} from "react-redux";
-import {useCallback, useEffect} from "react";
 import {productActions} from "../../../store/reducers/product/actions";
 import Loader from "../../common/Loader/Loader";
 import {SnackBar} from "../../common/SnackBar/SnackBar";
 import {snackBarActions} from "../../../store/reducers/snackBar/snackBarReducer";
-import {useParams} from "react-router-dom";
 
 const style = {
     backgroundImage: `url(${img})`
@@ -20,10 +19,9 @@ const style = {
 
 const Home = () => {
     const dispatch = useDispatch()
+
     const {products, loading, error, productsCount} = useSelector(state => state.products)
-    const {open,message} = useSelector(state => state.snackBar)
-
-
+    const {open, message} = useSelector(state => state.snackBar)
 
 
     const onCloseSnackBar = useCallback(() => {
@@ -33,16 +31,16 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(productActions.getAllProduct())
+        window.scrollTo(0, 0);
     }, [dispatch])
 
     useEffect(() => {
         if (error) {
-             dispatch(snackBarActions.openSnackBar(true))
-             dispatch(snackBarActions.setMessage(error))
+            dispatch(snackBarActions.openSnackBar(true))
+            dispatch(snackBarActions.setMessage(error))
+            dispatch(productActions.clearErrors())
         }
     }, [error])
-
-    console.log(error)
 
     return (
         <>
@@ -60,10 +58,13 @@ const Home = () => {
                         </Link>
                     </BannerBlock>
                     <Typography variant={'h2'} component={'h2'}>Рекомендуемые продукты</Typography>
-                    <Box className="container" id="container">
+                    <div
+                        className="container"
+                        id="container"
+                    >
                         {products.map((product) => <ProductCard key={product._id}
                                                                 product={product}/>)}
-                    </Box>
+                    </div>
                     <SnackBar open={open} onClose={onCloseSnackBar} severity={'error'} messageError={message}/>
                 </WrapperHome>
             }

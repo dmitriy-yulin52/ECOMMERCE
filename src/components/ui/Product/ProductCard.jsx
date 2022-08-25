@@ -2,7 +2,7 @@ import * as  React from 'react';
 import ReactStars from 'react-rating-stars-component';
 import {ProductCard} from "./ProductStyles";
 import {Box, Typography} from "@mui/material";
-import {useParams} from "react-router-dom";
+
 
 
 const options = {
@@ -17,16 +17,19 @@ const options = {
 const ProductCardImpl = ({product}) => {
     const {price, _id, images, name} = product;
 
+  //     const ref = useRef(null);
+  // const isInView = useInView(ref, { once: true });
 
 
     return (
-        <ProductCard to={`/product/${_id}`}>
+        <ProductCard to={`/product/${_id}`}
+                     >
             <img src={product.images[0].url} alt={name}/>
             <Typography component={'p'}>{name}</Typography>
             <Box className={'block'}>
                 <ReactStars {...options} value={product.ratings}/>
                 <Typography className={'productCardSpanViews'} component={'span'}>
-                     {`${product.numOfReviews} ${product.numOfReviews < 10 ? 'Просмотра': 'Просмотров'}`}
+                    {`${product.numOfReviews} Просмотры`}
                 </Typography>
             </Box>
             <Typography className={'productCardSpanPrice'} component={'span'}>{`${price} ₽`}</Typography>

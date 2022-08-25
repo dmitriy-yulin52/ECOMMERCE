@@ -17,7 +17,7 @@ const Footer = () => {
             </LeftBlock>
             <MiddleBlock>
                 <Typography variant={'h1'} component={'h1'}>GORKY_52.</Typography>
-                <Typography component={'p'}>Высокое качество - наш главный приоритет</Typography>
+                <Typography component={'p'}>Высокое качество - мой главный приоритет</Typography>
                 <Typography component={'p'}>Copyrights 2022 &copy; Yulin Dmitriy</Typography>
             </MiddleBlock>
             <RightBlock>
