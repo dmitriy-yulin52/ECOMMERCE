@@ -8,14 +8,14 @@ export const productActions = {
 }
 
 
-function getAllProduct() {
+function getAllProduct(keyword = '',currentPage = 1,price,ratings,category) {
     return async (dispatch) => {
         try {
             dispatch({
                 type: ALL_PRODUCT_REQUEST
             })
-            const {data} = await productApi.getAllProduct();
-            console.log(data)
+            const {data} = await productApi.getAllProduct(keyword,currentPage,price,ratings,category);
+            console.log(data,'data')
             dispatch({
                 type: ALL_PRODUCT_SUCCESS,
                 payload: data

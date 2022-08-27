@@ -5,7 +5,6 @@ import img from '../../../assets/images/cover.jfif'
 import {Button, Link, Typography} from "@mui/material";
 import {BannerBlock, WrapperHome} from "./HomeStyles";
 import ProductCard from '../Product/ProductCard'
-import MetaData from '../MetaData'
 import {useDispatch, useSelector} from "react-redux";
 import {productActions} from "../../../store/reducers/product/actions";
 import Loader from "../../common/Loader/Loader";
@@ -47,7 +46,6 @@ const Home = () => {
             {loading
                 ? <Loader/>
                 : <WrapperHome>
-                    <MetaData title={'ECCOMERCE GORKY_52'}/>
                     <BannerBlock style={style}>
                         <Typography component={'p'}>Добро пожаловать в Ecommerce</Typography>
                         <Typography variant={'h1'} component={'h1'}>НАЙДИТЕ УДИВИТЕЛЬНЫЕ ПРОДУКТЫ НИЖЕ</Typography>

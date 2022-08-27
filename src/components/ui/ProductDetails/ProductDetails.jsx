@@ -2,7 +2,6 @@ import * as React from 'react';
 import {useCallback, useEffect, useState} from 'react';
 import {useLocation, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import MetaData from "../MetaData";
 import {Box, Button, Rating, Typography} from "@mui/material";
 import Loader from "../../common/Loader/Loader";
 import './ProductDetails.scss'
@@ -106,7 +105,6 @@ const ProductDetails = () => {
                 <Loader/>
             ) : (
                 <>
-                    <MetaData title={`${product.name} -- ECOMMERCE`}/>
                     <Box
                         className={'ProductDetails'}
                     >

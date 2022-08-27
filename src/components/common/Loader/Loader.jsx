@@ -6,11 +6,11 @@ const styleWrapper = {
     placeItems:'center'
 }
 
-const Loader = () => {
+const Loader = ({styleHeight}) => {
     return (
         <LoaderWrapper
          width={'100vw'}
-         height={'100vh'}
+         height={styleHeight ? '' :'100vh'}
          bgcolor={'white'}
          display={'grid'}
          maxWidth={'100%'}

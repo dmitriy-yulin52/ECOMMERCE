@@ -42,7 +42,13 @@ input[type="number"] {
 
 ::-webkit-scrollbar-thumb {
     background-color: #ff0202;
+    background-color: #253861;
     border-radius: 9em;
     box-shadow: inset 1px 1px 10px #f3faf7;
 }
+::-webkit-scrollbar-thumb:hover {
+    background-color:  #ff0202;
+}
+
+
 `

@@ -2,7 +2,7 @@ import * as  React from 'react';
 import ReactStars from 'react-rating-stars-component';
 import {ProductCard} from "./ProductStyles";
 import {Box, Typography} from "@mui/material";
-
+import {memo} from "react";
 
 
 const options = {
@@ -14,27 +14,24 @@ const options = {
     size: window.innerWidth < 800 ? 16 : 25
 }
 
-const ProductCardImpl = ({product}) => {
-    const {price, _id, images, name} = product;
-
-  //     const ref = useRef(null);
-  // const isInView = useInView(ref, { once: true });
-
+const ProductCardImpl = memo(({product}) => {
+    const {price, _id, images, name, ratings, numOfReviews} = product;
 
     return (
-        <ProductCard to={`/product/${_id}`}
-                     >
-            <img src={product.images[0].url} alt={name}/>
+        <ProductCard
+            to={`/product/${_id}`}
+        >
+            <img src={images[0].url} alt={name}/>
             <Typography component={'p'}>{name}</Typography>
             <Box className={'block'}>
-                <ReactStars {...options} value={product.ratings}/>
+                <ReactStars {...options} value={ratings}/>
                 <Typography className={'productCardSpanViews'} component={'span'}>
-                    {`${product.numOfReviews} Просмотры`}
+                    {`${numOfReviews} Просмотры`}
                 </Typography>
             </Box>
             <Typography className={'productCardSpanPrice'} component={'span'}>{`${price} ₽`}</Typography>
         </ProductCard>
     );
-};
+});
 
 export default ProductCardImpl;
