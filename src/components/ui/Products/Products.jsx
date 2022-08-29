@@ -7,7 +7,7 @@ import ProductCard from "../Product/ProductCard";
 import {useDispatch, useSelector} from "react-redux";
 import {productActions} from "../../../store/reducers/product/actions";
 import {snackBarActions} from "../../../store/reducers/snackBar/snackBarReducer";
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import Pagination from 'react-js-pagination'
 import useDebounce from "../../../utils/hooks/useDebounce";
 
@@ -29,7 +29,6 @@ const Products = () => {
         error,
         productsCount,
         resultPerPage,
-        filteredProductsCount,
     } = useSelector((state) => state.products);
     const dispatch = useDispatch()
     const params = useParams()
@@ -40,8 +39,8 @@ const Products = () => {
     const [ratings, setRatings] = useState(null);
 
     const keyword = params.keyword
-    const debouncePrice = useDebounce(price,1000)
-    const debounceRatings = useDebounce(ratings,1000)
+    const debouncePrice = useDebounce(price, 1000)
+    const debounceRatings = useDebounce(ratings, 1000)
 
     const onSetPriceHandler = (_, newPrice) => {
         setPrice(newPrice);
@@ -54,8 +53,8 @@ const Products = () => {
     }
 
     useEffect(() => {
-        dispatch(productActions.getAllProduct(keyword, currentPage,debouncePrice,debounceRatings,category))
-    }, [currentPage, keyword, dispatch,debouncePrice,debounceRatings,category])
+        dispatch(productActions.getAllProduct(keyword, currentPage, debouncePrice, debounceRatings, category))
+    }, [currentPage, keyword, dispatch, debouncePrice, debounceRatings, category])
 
     useEffect(() => {
         if (error) {
@@ -64,6 +63,10 @@ const Products = () => {
             dispatch(productActions.clearErrors())
         }
     }, [error])
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
 
 
     return (
@@ -95,7 +98,7 @@ const Products = () => {
                         <Typography>Категории</Typography>
                         <ul className="categoryBox">
                             {categories.map((el) => {
-                               return  <li
+                                return <li
                                     className={`category-link ${category === el ? 'active' : ''}`}
                                     key={el}
                                     onClick={() => setCategory(el)}

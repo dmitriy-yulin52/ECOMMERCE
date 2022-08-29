@@ -60,7 +60,7 @@ const Search = () => {
                             products.length > 0
                                 ?
                                 <Box className={'block'}>{products.map((product) => (
-                                    <Link to={`/products/${product.name}`}>
+                                    <Link key={product.name} to={`/products/${product.name}`}>
                                         <ListItem>{product.name}</ListItem>
                                     </Link>))}
                                 </Box>
