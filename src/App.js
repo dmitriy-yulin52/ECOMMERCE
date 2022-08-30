@@ -8,6 +8,7 @@ import './styles/styles.scss'
 import ProductDetails from "./components/ui/ProductDetails/ProductDetails";
 import Products from "./components/ui/Products/Products";
 import Search from "./components/ui/Search/Search";
+import LoginSignUp from "./components/ui/User/Login/LoginSignUp";
 
 
 
@@ -30,6 +31,7 @@ function App() {
                 <Route path={'/products'} element={<Products/>}/>
                 <Route path={'/products/:keyword'} element={<Products/>}/>
                 <Route path={'/search'} element={<Search/>}/>
+                <Route path={'/login'} element={<LoginSignUp/>}/>
             </Route>
         </Routes>
     );
