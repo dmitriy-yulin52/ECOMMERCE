@@ -4,12 +4,14 @@ import thunk from 'redux-thunk'
 import {productReducer} from "./reducers/product/productReducer";
 import {snackBarReducer} from "./reducers/snackBar/snackBarReducer";
 import {productDetailsReducer} from "./reducers/productDetails/productDetails";
+import {userReducer} from "./reducers/user/user-reducer";
 
 
 const rootReducers = combineReducers({
     products:productReducer,
     snackBar:snackBarReducer,
-    productDetails:productDetailsReducer
+    productDetails:productDetailsReducer,
+    user:userReducer
 });
 
 
