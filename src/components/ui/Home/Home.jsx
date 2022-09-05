@@ -46,6 +46,7 @@ const Home = () => {
             {loading
                 ? <Loader/>
                 : <WrapperHome>
+
                     <BannerBlock style={style}>
                         <Typography component={'p'}>Добро пожаловать в Ecommerce</Typography>
                         <Typography variant={'h1'} component={'h1'}>НАЙДИТЕ УДИВИТЕЛЬНЫЕ ПРОДУКТЫ НИЖЕ</Typography>
@@ -56,6 +57,7 @@ const Home = () => {
                         </Link>
                     </BannerBlock>
                     <Typography variant={'h2'} component={'h2'}>Рекомендуемые продукты</Typography>
+                    <span>span my</span>
                     <div
                         className="container"
                         id="container"

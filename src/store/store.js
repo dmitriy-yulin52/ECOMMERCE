@@ -5,13 +5,21 @@ import {productReducer} from "./reducers/product/productReducer";
 import {snackBarReducer} from "./reducers/snackBar/snackBarReducer";
 import {productDetailsReducer} from "./reducers/productDetails/productDetails";
 import {userReducer} from "./reducers/user/user-reducer";
+import {profileReducer} from "./reducers/user/profile-reducer";
+import {forgotPasswordReducer} from "./reducers/user/forgotPasswordReducer";
+import {allUsersReducer} from "./reducers/user/allUserReducer";
+import {userDetailsReducer} from "./reducers/user/userDetailsReducer";
 
 
 const rootReducers = combineReducers({
     products:productReducer,
     snackBar:snackBarReducer,
     productDetails:productDetailsReducer,
-    user:userReducer
+    user:userReducer,
+    profile:profileReducer,
+    forgotPassword: forgotPasswordReducer,
+    allUsers: allUsersReducer,
+    userDetails: userDetailsReducer,
 });
 
 

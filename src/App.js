@@ -9,11 +9,15 @@ import ProductDetails from "./components/ui/ProductDetails/ProductDetails";
 import Products from "./components/ui/Products/Products";
 import Search from "./components/ui/Search/Search";
 import LoginSignUp from "./components/ui/User/Login/LoginSignUp";
+import {userActions} from "./store/reducers/user/actions";
+import {useDispatch} from "react-redux";
 
 
 
 
 function App() {
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         WebFont.load({
@@ -21,6 +25,7 @@ function App() {
                 families: ['Roboto', 'Droid Sans', 'Chilanka']
             }
         })
+        dispatch(userActions.loadUser())
     }, [])
 
     return (
