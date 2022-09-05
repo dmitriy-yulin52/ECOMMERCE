@@ -27,7 +27,6 @@ const options = {
 
 const style = {margin: '0px auto 10px auto'}
 
-
 const ProductDetails = () => {
 
     const {product, loading, error} = useSelector(state => state.productDetails)
@@ -35,12 +34,10 @@ const ProductDetails = () => {
     const dispatch = useDispatch()
     const {id} = useParams()
 
-
     const [prod, setProd] = useState({})
     const [quantity, setQuantity] = useState(0);
     const [textDialogReview, setTextDialogReview] = useState('')
     const [openDialogReview, setOpenDialogReview] = useState(false)
-
 
     const onChangeTextDialogReview = useCallback((e) => {
         setTextDialogReview(e.currentTarget.value)
@@ -55,14 +52,12 @@ const ProductDetails = () => {
 
     const incrQuantity = () => {
         // if (product.Stock <= quantity) return;
-
         const qty = quantity + 1;
         setQuantity(qty)
     };
 
     const decrQuantity = () => {
         // if (1 >= quantity) return;
-
         const qty = quantity - 1;
         setQuantity(qty);
     };
@@ -108,6 +103,7 @@ const ProductDetails = () => {
                     <Box
                         className={'ProductDetails'}
                     >
+
                         <Box className={'block'}>
                             <Carousel
                                 hideArrow={product.images && product?.images.length === 1}
@@ -120,7 +116,7 @@ const ProductDetails = () => {
                                 mobileBreakpoint={500}
                             >
                                 {prod.product ? prod.product.images.map((el) => {
-                                    return <Carousel.Item key={el.url}>
+                                    return <Carousel.Item key={el.url} >
                                         <img width="100%" src={el.url}/>
                                     </Carousel.Item>
                                 }) : <Carousel.Item>
@@ -163,7 +159,8 @@ const ProductDetails = () => {
                                     <Typography
                                         margin={'0px 0px 0px 8px'}
                                         component={'b'}
-                                        className={product.Stock < 1 ? "redColor" : "greenColor"}>
+                                        className={product.Stock < 1 ? "redColor" : "greenColor"}
+                                    >
                                         {product.Stock < 1 ? "Нет в наличии" : "В наличии"}
                                     </Typography>
                                 </Typography>
