@@ -7,12 +7,9 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import './LoginSignUp.scss'
-import ProfileImg from '../../../../assets/images/Profile.png'
 import {userActions} from "../../../../store/reducers/user/actions";
 import {snackBarActions} from "../../../../store/reducers/snackBar/snackBarReducer";
 import {productActions} from "../../../../store/reducers/product/actions";
-import instance from "../../../../api/instance";
-import axios from "axios";
 
 
 const LoginSignUp = () => {
@@ -71,12 +68,8 @@ const LoginSignUp = () => {
         myForm.set("email", email);
         myForm.set("password", password);
         myForm.set("avatar", avatar);
-        console.log('registerSubmit', {email, password, name,avatar})
-        console.log('myForm',myForm)
-        dispatch(userActions.register(myForm))
-        // const {data} = await axios.post(`/api/v1/register`, {email, password, name})
 
-        // dispatch(userActions.register(myForm))
+        dispatch(userActions.register(myForm))
     };
 
     const registerDataChange = (e) => {
