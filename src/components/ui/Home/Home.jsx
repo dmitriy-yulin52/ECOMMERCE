@@ -57,7 +57,6 @@ const Home = () => {
                         </Link>
                     </BannerBlock>
                     <Typography variant={'h2'} component={'h2'}>Рекомендуемые продукты</Typography>
-                    <span>span my</span>
                     <div
                         className="container"
                         id="container"
