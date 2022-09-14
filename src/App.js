@@ -1,7 +1,7 @@
 import * as React from 'react'
-import {useEffect} from "react";
+import {useEffect} from 'react'
 import WebFont from 'webfontloader';
-import {Routes, Route} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import Home from "./components/ui/Home/Home";
 import Layout from "./components/ui/Layout/Layout";
 import './styles/styles.scss'
@@ -27,7 +27,6 @@ function App() {
         })
         dispatch(userActions.loadUser())
     }, [])
- console.log('fddf')
 
     return (
         <>
