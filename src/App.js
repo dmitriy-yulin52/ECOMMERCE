@@ -27,6 +27,7 @@ function App() {
         })
         dispatch(userActions.loadUser())
     }, [])
+ console.log('fddf')
 
     return (
         <>
