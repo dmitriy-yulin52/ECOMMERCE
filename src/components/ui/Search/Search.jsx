@@ -40,7 +40,7 @@ const Search = () => {
     };
 
     useEffect(() => {
-        dispatch(productActions.getAllProduct(keyword))
+        dispatch(productActions.getAllProduct(debounce))
     }, [debounce])
 
 
@@ -80,6 +80,5 @@ const Search = () => {
         </>
     );
 };
-
 
 export default Search;
